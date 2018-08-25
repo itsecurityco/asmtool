@@ -33,15 +33,15 @@ for char in range(0, len(string), 4):
 opcode.reverse()
 
 # Print opcode
-print(Fore.WHITE + "Assembler\r\n")
+print(Fore.WHITE + "[*] Python\r\n")
 
 for group in opcode:
-    print(Fore.GREEN + "%s -> PUSH %s -> \"%s\"" % (
+    print(Fore.GREEN + "\"%s\"      # PUSH %s -> \"%s\"" % (
         group,
         ''.join(group.split("\\x"))[2:],
         binascii.unhexlify(''.join(group.split("\\x")))[1:]
     ))
 
-print(Fore.WHITE + "\r\n[*] OPCODE\r\n")
+print(Fore.WHITE + "\r\n[*] Raw\r\n")
 
 print(Fore.GREEN + ''.join(opcode))
