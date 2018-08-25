@@ -1,0 +1,47 @@
+#!/usr/bin/env python
+# Author: Juan Escobar @itsecurityco
+# Push a string to the stack
+
+import sys
+import binascii
+from colorama import init, Fore; init()
+
+string = sys.argv[1]
+opcode = list()
+
+# ASCII string needs to be 4-character aligned
+mod = len(string) % 4
+
+if mod != 0:
+    string = string.ljust(len(string)+4 - mod)
+
+# Split string into groups of 4 characters
+for char in range(0, len(string), 4):
+
+    # Add \x68 (PUSH)
+    group  = "\\x68"
+
+    # Convert each character to hex
+    group += "\\x%02X" % ord(string[char])
+    group += "\\x%02X" % ord(string[char+1])
+    group += "\\x%02X" % ord(string[char+2])
+    group += "\\x%02X" % ord(string[char+3])
+
+    opcode.append(group)
+
+# Reverse the order of the character groups
+opcode.reverse()
+
+# Print opcode
+print(Fore.WHITE + "Assembler\r\n")
+
+for group in opcode:
+    print(Fore.GREEN + "%s -> PUSH %s -> \"%s\"" % (
+        group,
+        ''.join(group.split("\\x"))[2:],
+        binascii.unhexlify(''.join(group.split("\\x")))[1:]
+    ))
+
+print(Fore.WHITE + "\r\n[*] OPCODE\r\n")
+
+print(Fore.GREEN + ''.join(opcode))
