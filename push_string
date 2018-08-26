@@ -6,6 +6,11 @@ import sys
 import binascii
 from colorama import init, Fore; init()
 
+# Usage help
+if len(sys.argv) <= 1:
+    print(Fore.WHITE + "Usage: %s text" % sys.argv[0])
+    exit(1)
+
 string = sys.argv[1]
 opcode = list()
 
