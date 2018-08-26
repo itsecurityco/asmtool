@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # Author: Juan Escobar @itsecurityco
-# Push a string to the stack
+# Generate the opcode to push a string to the stack
 
 import sys
 import binascii
@@ -8,6 +8,7 @@ from colorama import init, Fore; init()
 
 # Usage help
 if len(sys.argv) <= 1:
+    print(Fore.WHITE + "Generate the opcode to push a string to the stack")
     print(Fore.WHITE + "Usage: %s text" % sys.argv[0])
     exit(1)
 
