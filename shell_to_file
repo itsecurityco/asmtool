@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+# Author: Juan Escobar @itsecurityco
+# Write hexadecimal shellcode to a file
+
+import sys
+from colorama import init, Fore; init()
+
+# Usage help
+if len(sys.argv) <= 2:
+    print(Fore.WHITE + "Write hexadecimal shellcode to a file")
+    print(Fore.WHITE + "Usage: %s \"\x41\x41\x41\x41...\" output.bin" % sys.argv[0])
+    exit(1)
+
+# Arguments
+shellcode = sys.argv[1]
+filename  = sys.argv[2]
+
+# Hex string to raw
+raw = ""
+for i in shellcode.split("\\x"):
+  raw += i.decode("hex") 
+
+# Write file to disk
+handle = open(filename, 'wb')
+handle.write(raw)
+handle.close()
+
+print(Fore.WHITE + "\r\n[*] Shellcode saved into %s\r\n" % filename)
+print(Fore.GREEN + "\r\n%s\r\n" % shellcode)
