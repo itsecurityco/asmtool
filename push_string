@@ -42,12 +42,11 @@ opcode.reverse()
 print(Fore.WHITE + "[*] Python\r\n")
 
 for group in opcode:
-    print(Fore.GREEN + "\"%s\"      # PUSH %s -> \"%s\"" % (
+    print(Fore.GREEN + '"%s"      # PUSH %s -> "%s"' % (
         group,
-        ''.join(group.split("\\x"))[2:],
+        ''.join(group.split("\\x")[:1:-1]),
         binascii.unhexlify(''.join(group.split("\\x")))[1:]
     ))
 
 print(Fore.WHITE + "\r\n[*] Raw\r\n")
-
 print(Fore.GREEN + ''.join(opcode))
