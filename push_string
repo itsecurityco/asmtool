@@ -48,5 +48,8 @@ for group in opcode:
         binascii.unhexlify(''.join(group.split("\\x")))[1:]
     ))
 
-print(Fore.WHITE + "\r\n[*] Raw\r\n")
+# get length from opcode
+length = len(''.join(opcode).split("\\x"))-1
+
+print(Fore.WHITE + "\r\n[*] Raw, Lenght: %d\r\n" % length)
 print(Fore.GREEN + ''.join(opcode))
